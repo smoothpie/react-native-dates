@@ -207,8 +207,6 @@ export const Month = (props: MonthType) => {
     onDisableClicked,
     daySelectedStyle,
     dayBlockedStyle,
-    monthNavigatorStyle,
-    focusedMonthStyle,
   } = props;
 
   const dayNames = [];
@@ -292,11 +290,11 @@ export default class Dates extends Component {
       <View style={styles.calendar}>
         <View style={styles.heading}>
           <TouchableOpacity onPress={previousMonth}>
-            <Text style={monthNavigatorStyle}>{'< Previous'}</Text>
+            <Text style={this.props.monthNavigatorStyle}>{'< Previous'}</Text>
           </TouchableOpacity>
-          <Text style={focusedMonthStyle}>{this.state.focusedMonth.format('MMMM')}</Text>
+          <Text style={this.props.focusedMonthStyle}>{this.state.focusedMonth.format('MMMM')}</Text>
           <TouchableOpacity onPress={nextMonth}>
-            <Text style={monthNavigatorStyle}>{'Next >'}</Text>
+            <Text style={this.props.monthNavigatorStyle}>{'Next >'}</Text>
           </TouchableOpacity>
         </View>
         <Month
