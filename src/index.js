@@ -164,7 +164,9 @@ export const Week = (props: WeekType) => {
     const style = [
       styles.day,
       isBlocked && styles.dayBlocked,
-      isSelected && styles.daySelected
+      isBlocked && props.dayBlockedStyle,
+      isSelected && styles.daySelected,
+      isSelected && props.daySelectedStyle
     ];
 
     const styleText = [
@@ -202,7 +204,11 @@ export const Month = (props: MonthType) => {
     focusedMonth,
     onDatesChange,
     isDateBlocked,
-    onDisableClicked
+    onDisableClicked,
+    daySelectedStyle,
+    dayBlockedStyle,
+    monthNavigatorStyle,
+    focusedMonthStyle,
   } = props;
 
   const dayNames = [];
@@ -236,6 +242,8 @@ export const Month = (props: MonthType) => {
         onDatesChange={onDatesChange}
         isDateBlocked={isDateBlocked}
         onDisableClicked={onDisableClicked}
+        daySelectedStyle={daySelectedStyle}
+        dayBlockedStyle={dayBlockedStyle}
       />
     );
     return null;
@@ -284,11 +292,11 @@ export default class Dates extends Component {
       <View style={styles.calendar}>
         <View style={styles.heading}>
           <TouchableOpacity onPress={previousMonth}>
-            <Text>{'< Previous'}</Text>
+            <Text style={monthNavigatorStyle}>{'< Previous'}</Text>
           </TouchableOpacity>
-          <Text>{this.state.focusedMonth.format('MMMM')}</Text>
+          <Text style={focusedMonthStyle}>{this.state.focusedMonth.format('MMMM')}</Text>
           <TouchableOpacity onPress={nextMonth}>
-            <Text>{'Next >'}</Text>
+            <Text style={monthNavigatorStyle}>{'Next >'}</Text>
           </TouchableOpacity>
         </View>
         <Month
@@ -302,6 +310,8 @@ export default class Dates extends Component {
           onDatesChange={this.props.onDatesChange}
           isDateBlocked={this.props.isDateBlocked}
           onDisableClicked={this.props.onDisableClicked}
+          daySelectedStyle={this.props.daySelectedStyle}
+          dayBlockedStyle={this.props.dayBlockedStyle}
         />
       </View>
     );
